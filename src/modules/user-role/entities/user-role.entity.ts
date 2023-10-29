@@ -1,5 +1,5 @@
 import { IUserRole } from "../../../core/user-role/user-role.interface";
-import { Role } from "../../../common/types/role.enum";
+import { Role } from "../../../common/types/enums/role.enum";
 import {
     Column,
     CreateDateColumn,

@@ -1,4 +1,4 @@
-import { Role } from "../../../common/types/role.enum";
+import { Role } from "../../../common/types/enums/role.enum";
 import { IsEnum, IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreateUserRoleDto {

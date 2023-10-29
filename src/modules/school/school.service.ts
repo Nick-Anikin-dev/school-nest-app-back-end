@@ -4,7 +4,7 @@ import { UpdateSchoolDto } from './dto/update-school.dto';
 
 @Injectable()
 export class SchoolService {
-  create(createSchoolDto: CreateSchoolDto) {
+  create(dto: CreateSchoolDto) {
     return 'This action adds a new school';
   }
 
@@ -16,7 +16,7 @@ export class SchoolService {
     return `This action returns a #${id} school`;
   }
 
-  update(id: number, updateSchoolDto: UpdateSchoolDto) {
+  update(id: number, dto: UpdateSchoolDto) {
     return `This action updates a #${id} school`;
   }
 

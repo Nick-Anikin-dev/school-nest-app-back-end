@@ -6,7 +6,7 @@ import { Repository } from "typeorm";
 import { Student } from "../student/entities/student.entity";
 import { Teacher } from "../teacher/entities/teacher.entity";
 import { Admin } from "../admin/entities/admin.entity";
-import { Role } from "../../common/types/role.enum";
+import { Role } from "../../common/types/enums/role.enum";
 
 @Injectable()
 export class UserRoleService {

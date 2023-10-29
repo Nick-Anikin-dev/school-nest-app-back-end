@@ -4,7 +4,7 @@ import { SignUpDto } from "./dto/sign-up.dto";
 import { SignInDto } from "./dto/sign-in.dto";
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
 import { User } from "../../common/decorators/user.decorator";
-import { AuthUser } from "../../common/types/auth-user.interface";
+import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
 
 @Controller('auth')
 export class AuthController {

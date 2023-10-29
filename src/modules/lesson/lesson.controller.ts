@@ -8,27 +8,27 @@ export class LessonController {
   constructor(private readonly lessonService: LessonService) {}
 
   @Post()
-  create(@Body() createLessonDto: CreateLessonDto) {
-    return this.lessonService.create(createLessonDto);
+  async create(@Body() dto: CreateLessonDto) {
+    return await this.lessonService.create(dto);
   }
 
   @Get()
-  findAll() {
-    return this.lessonService.findAll();
+  async findAll() {
+    return await this.lessonService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.lessonService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.lessonService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLessonDto: UpdateLessonDto) {
-    return this.lessonService.update(+id, updateLessonDto);
+  async update(@Param('id') id: string, @Body() dto: UpdateLessonDto) {
+    return await this.lessonService.update(+id, dto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.lessonService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.lessonService.remove(+id);
   }
 }

@@ -12,6 +12,8 @@ import { UserModule } from './modules/user/user.module';
 import { DatabaseModule } from "./config/database.config";
 import { CooperationModule } from './modules/cooperation/cooperation.module';
 import { ConfigModule } from "@nestjs/config";
+import { TaskModule } from './modules/task/task.module';
+import { TestModule } from './modules/test/test.module';
 
 @Module({
   imports: [
@@ -27,7 +29,10 @@ import { ConfigModule } from "@nestjs/config";
     AdminModule,
     UserRoleModule,
     UserModule,
-    CooperationModule ]
+    CooperationModule,
+    TaskModule,
+    TestModule,
+    TestModule ]
 })
 export class AppModule {
 }

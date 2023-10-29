@@ -9,16 +9,18 @@ import { Admin } from "../modules/admin/entities/admin.entity";
 import { Teacher } from "../modules/teacher/entities/teacher.entity";
 import { School } from "../modules/school/entities/school.entity";
 import { Topic } from "../modules/topic/entities/topic.entity";
+import { RequestForCooperation } from "../modules/cooperation/entities/cooperation.entity";
+import { Test } from "../modules/test/entities/test.entity";
 
 enum Env {
     prod = "production",
-    dev = "development",
     test = "testing",
+    dev = "development",
 }
 
-function getDbConfig(
+function getDatabaseConfig(
     configService: ConfigService,
-    entities: any[]
+    entities
 ): PostgresConnectionOptions {
     const env = configService.get<Env>("NODE_ENV");
 
@@ -55,7 +57,7 @@ export const DatabaseModule = TypeOrmModule.forRootAsync({
     imports: [ ConfigModule ],
     inject: [ ConfigService ],
     useFactory: (configService: ConfigService) =>
-        getDbConfig(configService, [
+        getDatabaseConfig(configService, [
             User,
             UserRole,
             Admin,
@@ -64,5 +66,7 @@ export const DatabaseModule = TypeOrmModule.forRootAsync({
             School,
             Lesson,
             Topic,
+            RequestForCooperation,
+            Test,
         ])
 });
