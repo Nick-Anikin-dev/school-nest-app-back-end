@@ -1,4 +1,12 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateCooperationDto } from './create-cooperation.dto';
+import { IsEnum, IsOptional, IsString } from "class-validator";
+import { RequestForCooperationStatus } from "../../../core/cooperation/enums/request-for-cooperation-status.enum";
 
-export class UpdateCooperationDto extends PartialType(CreateCooperationDto) {}
+export class UpdateCooperationDto {
+    @IsString()
+    @IsOptional()
+    message?: string;
+
+    @IsEnum(RequestForCooperationStatus)
+    @IsOptional()
+    status?: RequestForCooperationStatus;
+}

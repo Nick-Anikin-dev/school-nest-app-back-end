@@ -11,8 +11,7 @@ export class UserService {
   constructor(
       private readonly userRoleService: UserRoleService,
       @InjectRepository(User) private readonly userRepository: Repository<User>
-  ) {
-  }
+  ) {}
 
   async create(dto: CreateUserDto) {
     const {role, ...partial} = dto;

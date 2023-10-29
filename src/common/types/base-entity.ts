@@ -7,7 +7,7 @@ export interface IBaseEntity {
     deleted_at: Date;
 }
 
-export class BaseEntity implements IBaseEntity{
+export class BaseEntity implements IBaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 

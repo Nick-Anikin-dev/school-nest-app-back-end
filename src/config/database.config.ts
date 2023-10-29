@@ -11,6 +11,7 @@ import { School } from "../modules/school/entities/school.entity";
 import { Topic } from "../modules/topic/entities/topic.entity";
 import { RequestForCooperation } from "../modules/cooperation/entities/cooperation.entity";
 import { Test } from "../modules/test/entities/test.entity";
+import { Group } from "../modules/group/entities/group.entity";
 
 enum Env {
     prod = "production",
@@ -68,5 +69,6 @@ export const DatabaseModule = TypeOrmModule.forRootAsync({
             Topic,
             RequestForCooperation,
             Test,
+            Group,
         ])
 });

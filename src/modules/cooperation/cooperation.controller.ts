@@ -8,27 +8,27 @@ export class CooperationController {
   constructor(private readonly requestForCooperationService: CooperationService) {}
 
   @Post()
-  create(@Body() createRequestForCooperationDto: CreateCooperationDto) {
-    return this.requestForCooperationService.create(createRequestForCooperationDto);
+  async create(@Body() createRequestForCooperationDto: CreateCooperationDto) {
+    return await this.requestForCooperationService.create(createRequestForCooperationDto);
   }
 
   @Get()
-  findAll() {
-    return this.requestForCooperationService.findAll();
+  async findAll() {
+    return await this.requestForCooperationService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.requestForCooperationService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.requestForCooperationService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRequestForCooperationDto: UpdateCooperationDto) {
-    return this.requestForCooperationService.update(+id, updateRequestForCooperationDto);
+  async update(@Param('id') id: string, @Body() updateRequestForCooperationDto: UpdateCooperationDto) {
+    return await this.requestForCooperationService.update(+id, updateRequestForCooperationDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.requestForCooperationService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.requestForCooperationService.remove(+id);
   }
 }

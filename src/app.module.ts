@@ -14,6 +14,7 @@ import { CooperationModule } from './modules/cooperation/cooperation.module';
 import { ConfigModule } from "@nestjs/config";
 import { TaskModule } from './modules/task/task.module';
 import { TestModule } from './modules/test/test.module';
+import { GroupModule } from './modules/group/group.module';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { TestModule } from './modules/test/test.module';
     CooperationModule,
     TaskModule,
     TestModule,
-    TestModule ]
+    TestModule,
+    GroupModule ]
 })
 export class AppModule {
 }

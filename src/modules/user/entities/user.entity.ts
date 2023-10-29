@@ -1,20 +1,11 @@
 import { IUser } from "../../../core/user/user.interface";
-import {
-    Column,
-    CreateDateColumn,
-    DeleteDateColumn,
-    Entity, JoinColumn,
-    OneToOne,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn
-} from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
 import { UserRole } from "../../user-role/entities/user-role.entity";
+import { BaseEntity } from "../../../common/types/base-entity";
+import { RequestForCooperation } from "../../cooperation/entities/cooperation.entity";
 
 @Entity('user')
-export class User implements IUser {
-    @PrimaryGeneratedColumn()
-    id: number;
-
+export class User extends BaseEntity implements IUser {
     @Column({
         type: 'varchar',
         nullable: false,
@@ -45,15 +36,6 @@ export class User implements IUser {
     })
     role_id: number;
 
-    @CreateDateColumn()
-    created_at: Date;
-
-    @UpdateDateColumn()
-    updated_at: Date;
-
-    @DeleteDateColumn()
-    deleted_at: Date;
-
     @OneToOne(() => UserRole, (userRole) => userRole.user, {
         eager: true,
         cascade: true,
@@ -62,4 +44,10 @@ export class User implements IUser {
         name: 'role_id'
     })
     role: UserRole;
+
+    @OneToMany(() => RequestForCooperation, (cooperation) => cooperation.recipient)
+    received_requests_for_cooperation: RequestForCooperation[];
+
+    @OneToMany(() => RequestForCooperation, (cooperation) => cooperation.sender)
+    sent_requests_for_cooperation: RequestForCooperation[];
 }
