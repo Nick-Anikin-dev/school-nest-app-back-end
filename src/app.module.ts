@@ -34,7 +34,8 @@ import { GroupModule } from './modules/group/group.module';
     TaskModule,
     TestModule,
     TestModule,
-    GroupModule ]
+    GroupModule
+  ]
 })
 export class AppModule {
 }

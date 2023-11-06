@@ -5,7 +5,7 @@ import { UserModule } from "../user/user.module";
 import { JwtModule } from "@nestjs/jwt";
 
 @Module({
-  imports: [UserModule,
+  imports: [ UserModule,
     JwtModule.register({
       secret: process.env.PRIVATE_KEY || "SECRET",
       signOptions: {
@@ -13,7 +13,9 @@ import { JwtModule } from "@nestjs/jwt";
       }
     })
   ],
-  controllers: [AuthController],
-  providers: [AuthService]
+  controllers: [ AuthController ],
+  providers: [ AuthService ],
+  exports: [ JwtModule ]
 })
-export class AuthModule {}
+export class AuthModule {
+}

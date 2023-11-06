@@ -13,9 +13,10 @@ import { User } from "../../user/entities/user.entity";
 import { Student } from "../../student/entities/student.entity";
 import { Teacher } from "../../teacher/entities/teacher.entity";
 import { Admin } from "../../admin/entities/admin.entity";
+import { BaseEntity } from "../../../common/types/base-entity";
 
 @Entity('user-role')
-export class UserRole implements IUserRole {
+export class UserRole extends BaseEntity implements IUserRole {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -32,15 +33,6 @@ export class UserRole implements IUserRole {
     })
     type: Role;
 
-    @CreateDateColumn()
-    created_at: Date;
-
-    @UpdateDateColumn()
-    updated_at: Date;
-
-    @DeleteDateColumn()
-    deleted_at: Date;
-
     @OneToOne(() => User, (user) => user.role)
     @JoinColumn({name: 'user_id'})
     user: User;
@@ -51,7 +43,6 @@ export class UserRole implements IUserRole {
         cascade: true,
     })
     student: Student;
-
 
     @OneToOne(() => Teacher, (teacher) => teacher.user_role, {
         nullable: true,

@@ -7,9 +7,15 @@ import { Topic } from "../../topic/entities/topic.entity";
 export class Lesson extends BaseEntity implements ILesson {
     @Column({
         type: 'varchar',
-        nullable: false,
+        nullable: true,
     })
     title: string;
+
+    @Column({
+        type: 'varchar',
+        nullable: true,
+    })
+    meeting_link: string;
 
     @Column({
         type: 'timestamptz',

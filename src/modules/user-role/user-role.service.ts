@@ -23,6 +23,7 @@ export class UserRoleService {
     const user_role = await this.userRoleRepository.save(new_user_role);
     switch (dto.type) {
       case Role.ADMIN:
+      case Role.SUPER_ADMIN:
         const new_admin = await this.addUserRole(this.adminRepository, user_role.id)
         return {
           ...user_role,

@@ -1,11 +1,11 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { BaseEntity } from "../../../common/types/base-entity";
 import { User } from "../../user/entities/user.entity";
 import { IRequestForCooperation } from "../../../core/cooperation/interfaces/cooperation.interface";
 import { RequestForCooperationStatus } from "../../../core/cooperation/enums/request-for-cooperation-status.enum";
 
 @Entity('request-for-cooperation')
-export class RequestForCooperation extends BaseEntity implements IRequestForCooperation{
+export class RequestForCooperation extends BaseEntity implements IRequestForCooperation {
     @Column({
         type: 'int',
         nullable: false,
