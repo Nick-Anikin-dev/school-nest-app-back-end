@@ -4,9 +4,10 @@ import { CooperationController } from './cooperation.controller';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { RequestForCooperation } from "./entities/cooperation.entity";
 import { UserModule } from "../user/user.module";
+import { AuthModule } from "../auth/auth.module";
 
 @Module({
-  imports: [ TypeOrmModule.forFeature([ RequestForCooperation ]), UserModule ],
+  imports: [ AuthModule, TypeOrmModule.forFeature([ RequestForCooperation ]), UserModule ],
   controllers: [ CooperationController ],
   providers: [ CooperationService ],
 })

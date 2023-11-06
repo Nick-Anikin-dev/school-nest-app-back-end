@@ -1,20 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseGuards } from '@nestjs/common';
 import { CooperationService } from './cooperation.service';
 import { CreateCooperationDto } from './dto/create-cooperation.dto';
 import { UpdateCooperationDto } from './dto/update-cooperation.dto';
+import { User } from "../../common/decorators/user.decorator";
+import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
+import { FindRfcQueryDto } from "./dto/find-rfc-query.dto";
+import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
 
 @Controller('cooperation')
+@UseGuards(JwtAuthGuard)
 export class CooperationController {
   constructor(private readonly requestForCooperationService: CooperationService) {}
 
   @Post()
-  async create(@Body() createRequestForCooperationDto: CreateCooperationDto) {
-    return await this.requestForCooperationService.create(createRequestForCooperationDto);
+  async create(@Body() createRequestForCooperationDto: CreateCooperationDto, @User() user: AuthUser) {
+    return await this.requestForCooperationService.create(createRequestForCooperationDto, user);
   }
 
   @Get()
-  async findAll() {
-    return await this.requestForCooperationService.findAll();
+  async findAll(@Query() dto: FindRfcQueryDto, @User() user: AuthUser) {
+    return await this.requestForCooperationService.findAll(dto, user);
   }
 
   @Get(':id')
