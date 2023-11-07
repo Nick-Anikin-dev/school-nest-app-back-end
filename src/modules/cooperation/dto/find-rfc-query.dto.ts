@@ -1,5 +1,5 @@
 import { RequestForCooperationStatus } from "../../../core/cooperation/enums/request-for-cooperation-status.enum";
-import { RequestForCooperationType } from "../types/request-for-cooperation-type.enum";
+import { RequestForCooperationType } from "../../../core/cooperation/enums/request-for-cooperation-type.enum";
 import { IsDate, IsEnum, IsOptional } from "class-validator";
 import { Transform } from "class-transformer";
 import { paramToArray } from "../../../common/utils/param-to-array";

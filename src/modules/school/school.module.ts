@@ -9,7 +9,8 @@ import { UserModule } from "../user/user.module";
 @Module({
   imports: [ AuthModule, TypeOrmModule.forFeature([ School ]), UserModule ],
   controllers: [ SchoolController ],
-  providers: [ SchoolService ]
+  providers: [ SchoolService ],
+  exports: [SchoolService],
 })
 export class SchoolModule {
 }

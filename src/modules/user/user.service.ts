@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "./entities/user.entity";
@@ -10,8 +10,9 @@ import { FindOptionsWhere } from "typeorm/find-options/FindOptionsWhere";
 export class UserService {
   constructor(
       private readonly userRoleService: UserRoleService,
-      @InjectRepository(User) private readonly userRepository: Repository<User>
-  ) {}
+      @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {
+  }
 
   async create(dto: CreateUserDto) {
     const {role, ...partial} = dto;
@@ -35,10 +36,18 @@ export class UserService {
   }
 
   async findOne(id: number) {
-    return await this.userRepository.findOne({
+    const user = await this.userRepository.findOne({
       where: {id}, relations: [
         'role'
       ]
     });
+    if (!user) {
+      throw new NotFoundException();
+    }
+    return user;
+  }
+
+  async updatePassword(user_id, password) {
+    return await this.userRepository.update({id: user_id}, {password})
   }
 }

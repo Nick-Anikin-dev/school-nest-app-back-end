@@ -6,6 +6,7 @@ import { User } from "../../common/decorators/user.decorator";
 import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
 import { FindRfcQueryDto } from "./dto/find-rfc-query.dto";
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { RespondCooperationDto } from "./dto/respond-cooperation.dto";
 
 @Controller('cooperation')
 @UseGuards(JwtAuthGuard)
@@ -30,6 +31,11 @@ export class CooperationController {
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateRequestForCooperationDto: UpdateCooperationDto) {
     return await this.requestForCooperationService.update(+id, updateRequestForCooperationDto);
+  }
+
+  @Patch(':id/respond')
+  async respond(@Param('id') id: string, @User() user: AuthUser, @Body() dto: RespondCooperationDto){
+    return await this.requestForCooperationService.respond(+id, user, dto);
   }
 
   @Delete(':id')

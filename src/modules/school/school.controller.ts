@@ -14,32 +14,32 @@ export class SchoolController {
   constructor(private readonly schoolService: SchoolService) {}
 
   @Post()
-  @Roles(Role.SUPER_ADMIN)
+  @Roles(Role.ADMIN)
   async create(@Body() dto: CreateSchoolDto, @User() user: AuthUser) {
     return await this.schoolService.create(dto, user);
   }
 
   @Get()
-  @Roles(Role.SUPER_ADMIN)
+  @Roles(Role.ADMIN)
   async findAll() {
     return await this.schoolService.findAll();
   }
 
   @Get(':id')
-  @Roles(Role.ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.ADMIN)
   async findOne(@Param('id') id: string) {
     return await this.schoolService.findOne(+id);
   }
 
   @Patch(':id')
-  @Roles(Role.ADMIN, Role.SUPER_ADMIN)
+  @Roles(Role.ADMIN)
   async update(@Param('id') id: string, @Body() dto: UpdateSchoolDto) {
     return await this.schoolService.update(+id, dto);
   }
 
   @Delete(':id')
-  @Roles(Role.SUPER_ADMIN)
-  async remove(@Param('id') id: string) {
-    return await this.schoolService.remove(+id);
+  @Roles(Role.ADMIN)
+  async remove(@Param('id') id: string, @User() user: AuthUser) {
+    return await this.schoolService.remove(+id, user);
   }
 }

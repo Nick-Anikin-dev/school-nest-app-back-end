@@ -23,7 +23,6 @@ export class UserRoleService {
     const user_role = await this.userRoleRepository.save(new_user_role);
     switch (dto.type) {
       case Role.ADMIN:
-      case Role.SUPER_ADMIN:
         const new_admin = await this.addUserRole(this.adminRepository, user_role.id)
         return {
           ...user_role,
@@ -52,5 +51,10 @@ export class UserRoleService {
 
   async findOne(id: number) {
     return await this.userRoleRepository.findOne({where: {id}});
+  }
+
+  async del(id: number){
+    const user_r = await this.userRoleRepository.findOne({where: {id}});
+    return await this.userRoleRepository.remove(user_r)
   }
 }

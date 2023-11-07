@@ -5,6 +5,7 @@ import { Student } from "../../student/entities/student.entity";
 import { Teacher } from "../../teacher/entities/teacher.entity";
 import { Group } from "../../group/entities/group.entity";
 import { UserRole } from "../../user-role/entities/user-role.entity";
+import { Admin } from "../../admin/entities/admin.entity";
 
 @Entity('school')
 export class School extends BaseEntity implements ISchool {
@@ -36,6 +37,9 @@ export class School extends BaseEntity implements ISchool {
 
     @OneToMany(() => Teacher, (teacher) => teacher.school)
     teachers: Teacher[];
+
+    @OneToMany(() => Admin, (admin) => admin.school)
+    administrators: Admin[];
 
     @OneToMany(() => Group, (group) => group.school)
     groups: Group[];

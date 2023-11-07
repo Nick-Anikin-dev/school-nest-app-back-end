@@ -38,7 +38,6 @@ export class User extends BaseEntity implements IUser {
 
     @OneToOne(() => UserRole, (userRole) => userRole.user, {
         eager: true,
-        cascade: true,
     })
     @JoinColumn({
         name: 'role_id'
