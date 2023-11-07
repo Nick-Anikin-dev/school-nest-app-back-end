@@ -4,6 +4,8 @@ import { RoleTemplate } from "../../../core/role/role-template.entity";
 import { UserRole } from "../../user-role/entities/user-role.entity";
 import { Group } from "../../group/entities/group.entity";
 import { School } from "../../school/entities/school.entity";
+import { Lesson } from "../../lesson/entities/lesson.entity";
+import { Teacher } from "../../teacher/entities/teacher.entity";
 
 @Entity('student')
 export class Student extends RoleTemplate implements IStudent {
@@ -30,4 +32,16 @@ export class Student extends RoleTemplate implements IStudent {
         name: 'group-student'
     })
     groups: Group[];
+
+    @ManyToMany(() => Lesson, (lesson) => lesson.students)
+    @JoinTable({
+        name: 'student-lesson'
+    })
+    lessons: Lesson[];
+
+    @ManyToMany(() => Teacher, (teacher) => teacher.students)
+    @JoinTable({
+        name: 'teacher-student'
+    })
+    teachers: Teacher[];
 }

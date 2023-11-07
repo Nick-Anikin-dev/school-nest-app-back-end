@@ -1,12 +1,12 @@
 import { Column, Entity, JoinTable, ManyToOne } from "typeorm";
-import { ITest } from "../../../core/task/interfaces/test-task.interface";
-import { ITestOption } from "../../../core/task/interfaces/test-task-option.interface";
+import { ITestTask } from "../../../core/task/interfaces/test-task.interface";
+import { ITestTaskOption } from "../../../core/task/interfaces/test-task-option.interface";
 import { TaskType } from "../../../core/task/enums/task-type.enum";
 import { Task } from "./task.entity";
 import { TestOption } from "./test-option.entity";
 
 @Entity('test-task')
-export class TestTask extends Task implements ITest {
+export class TestTask extends Task implements ITestTask {
     type: TaskType.TEST;
 
     @Column({
@@ -22,7 +22,7 @@ export class TestTask extends Task implements ITest {
     @JoinTable({
         name: 'test-task-options',
     })
-    options: ITestOption[];
+    options: ITestTaskOption[];
 
     @Column({
         type: 'int',

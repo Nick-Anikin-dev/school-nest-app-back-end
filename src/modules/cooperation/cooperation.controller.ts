@@ -14,8 +14,8 @@ export class CooperationController {
   constructor(private readonly requestForCooperationService: CooperationService) {}
 
   @Post()
-  async create(@Body() createRequestForCooperationDto: CreateCooperationDto, @User() user: AuthUser) {
-    return await this.requestForCooperationService.create(createRequestForCooperationDto, user);
+  async create(@Body() dto: CreateCooperationDto, @User() user: AuthUser) {
+    return await this.requestForCooperationService.create(dto, user);
   }
 
   @Get()
@@ -29,8 +29,8 @@ export class CooperationController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateRequestForCooperationDto: UpdateCooperationDto) {
-    return await this.requestForCooperationService.update(+id, updateRequestForCooperationDto);
+  async update(@Param('id') id: string, @Body() dto: UpdateCooperationDto) {
+    return await this.requestForCooperationService.update(+id, dto);
   }
 
   @Patch(':id/respond')

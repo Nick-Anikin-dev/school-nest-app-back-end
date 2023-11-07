@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { FileService } from './file.service';
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
+import { RolesGuard } from "../../common/guards/roles.guard";
 
 @Controller('file')
+@UseGuards(RolesGuard)
 export class FileController {
   constructor(private readonly fileService: FileService) {}
 

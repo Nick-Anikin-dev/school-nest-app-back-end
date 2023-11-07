@@ -1,10 +1,10 @@
 import { ITask } from "./task.interface";
 import { TaskType } from "../enums/task-type.enum";
-import { ITestOption } from "./test-task-option.interface";
+import { ITestTaskOption } from "./test-task-option.interface";
 
-export interface ITest extends ITask {
+export interface ITestTask extends ITask {
     type: TaskType.TEST,
     question: string;
-    options: ITestOption[];
+    options: ITestTaskOption[];
     correct_option_id: string;
 }

@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsString } from "class-validator";
+import { IsArray, IsDate, IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
 import { Transform } from "class-transformer";
 import { toDate } from "../../../common/utils/to-date";
 
@@ -16,4 +16,18 @@ export class CreateLessonDto {
     @IsNotEmpty()
     @Transform(({value}) => toDate(value))
     to: Date;
+
+    @IsOptional()
+    @IsArray()
+    @IsInt({each: true})
+    student_ids?: number[];
+
+    @IsOptional()
+    @IsInt()
+    group_id?: number;
+
+    @IsOptional()
+    @IsArray()
+    @IsInt({each: true})
+    teacher_ids?: number[];
 }

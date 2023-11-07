@@ -1,5 +1,5 @@
 import { Column, Entity, JoinTable, ManyToOne } from "typeorm";
-import { ITestOption } from "../../../core/task/interfaces/test-task-option.interface";
+import { ITestTaskOption } from "../../../core/task/interfaces/test-task-option.interface";
 import { TaskType } from "../../../core/task/enums/task-type.enum";
 import { Task } from "./task.entity";
 import { TestOption } from "./test-option.entity";
@@ -22,7 +22,7 @@ export class MultipleTestTask extends Task implements IMultipleTest {
     @JoinTable({
         name: 'test-task-options',
     })
-    options: ITestOption[];
+    options: ITestTaskOption[];
 
     @ManyToOne(() => TestOption, {
         eager: true,
@@ -31,5 +31,5 @@ export class MultipleTestTask extends Task implements IMultipleTest {
     @JoinTable({
         name: 'correct-test-task-options',
     })
-    correct_options: ITestOption[];
+    correct_options: ITestTaskOption[];
 }

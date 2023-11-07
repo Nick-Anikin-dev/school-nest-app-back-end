@@ -13,7 +13,7 @@ import { DatabaseModule } from "./config/database.config";
 import { CooperationModule } from './modules/cooperation/cooperation.module';
 import { ConfigModule } from "@nestjs/config";
 import { TaskModule } from './modules/task/task.module';
-import { TestModule } from './modules/test/test.module';
+import { ExerciseModule } from './modules/exercise/exercise.module';
 import { GroupModule } from './modules/group/group.module';
 
 @Module({
@@ -32,8 +32,8 @@ import { GroupModule } from './modules/group/group.module';
     UserModule,
     CooperationModule,
     TaskModule,
-    TestModule,
-    TestModule,
+    ExerciseModule,
+    ExerciseModule,
     GroupModule
   ]
 })
