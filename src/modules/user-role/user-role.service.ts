@@ -41,7 +41,6 @@ export class UserRoleService {
           [user_role.type]: new_teacher,
         }
     }
-
   }
 
   async addUserRole(repository: Repository<Admin | Teacher | Student>, user_role_id: number) {

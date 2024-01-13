@@ -8,6 +8,7 @@ import { Repository } from "typeorm";
 import { UserService } from "../user/user.service";
 import { User } from "../user/entities/user.entity";
 import { UserRoleSchoolMap } from "../../common/constants/user-role-school-map";
+import { IUser } from "../../core/user/user.interface";
 
 @Injectable()
 export class SchoolService {
@@ -23,8 +24,15 @@ export class SchoolService {
     return await this.schoolRepository.save(new_school);
   }
 
-  async findAll() {
-    return await this.schoolRepository.find();
+  async findAll(user: IUser) {
+    return await this.schoolRepository.find({
+      where: {
+        owner: {
+          user_id: user.id
+        }
+      },
+      relations: ["owner"]
+    });
   }
 
   async findOne(id: number) {

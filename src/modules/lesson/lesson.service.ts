@@ -7,6 +7,8 @@ import { In, Repository } from "typeorm";
 import { StudentService } from "../student/student.service";
 import { TeacherService } from "../teacher/teacher.service";
 import { GroupService } from "../group/group.service";
+import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
+import { FindLessonsQueryDto } from "./dto/find-lessons-query.dto";
 
 @Injectable()
 export class LessonService {
@@ -18,7 +20,7 @@ export class LessonService {
   ) {
   }
 
-  async create(dto: CreateLessonDto) {
+  async create(dto: CreateLessonDto, user: AuthUser) {
     const {teacher_ids, student_ids, group_id, ...partial} = dto;
     const partial_participants: Partial<Pick<Lesson, 'teachers' | 'students' | 'group'>> = {};
     if (student_ids) {
@@ -41,7 +43,7 @@ export class LessonService {
     return await this.lessonRepository.save(new_lesson);
   }
 
-  async findAll() {
+  async findAll(user: AuthUser, query: FindLessonsQueryDto) {
     return await this.lessonRepository.find();
   }
 

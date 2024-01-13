@@ -4,7 +4,7 @@ import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { UpdateExerciseDto } from './dto/update-exercise.dto';
 import { RolesGuard } from "../../common/guards/roles.guard";
 
-@Controller('test-task')
+@Controller('exercise')
 @UseGuards(RolesGuard)
 export class ExerciseController {
   constructor(private readonly testTaskService: ExerciseService) {}

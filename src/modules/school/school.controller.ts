@@ -7,6 +7,7 @@ import { Roles } from "../../common/decorators/role.decorator";
 import { Role } from "../../common/types/enums/role.enum";
 import { User } from "../../common/decorators/user.decorator";
 import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
+import { IUser } from "../../core/user/user.interface";
 
 @Controller('school')
 @UseGuards(RolesGuard)
@@ -21,14 +22,8 @@ export class SchoolController {
 
   @Get()
   @Roles(Role.ADMIN)
-  async findAll() {
-    return await this.schoolService.findAll();
-  }
-
-  @Get(':id')
-  @Roles(Role.ADMIN)
-  async findOne(@Param('id') id: string) {
-    return await this.schoolService.findOne(+id);
+  async findAll(@User() user: IUser) {
+    return await this.schoolService.findAll(user);
   }
 
   @Patch(':id')

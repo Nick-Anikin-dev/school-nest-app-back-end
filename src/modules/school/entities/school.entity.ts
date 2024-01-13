@@ -28,6 +28,12 @@ export class School extends BaseEntity implements ISchool {
     })
     preview: string;
 
+    @Column({
+        type: 'varchar',
+        nullable: true,
+    })
+    invitation_code: string;
+
     @ManyToOne(() => UserRole)
     @JoinColumn({name: 'owner_role_id'})
     owner: UserRole;

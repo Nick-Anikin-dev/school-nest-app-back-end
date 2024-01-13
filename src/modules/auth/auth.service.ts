@@ -14,6 +14,7 @@ import { UserService } from "../user/user.service";
 import * as bcrypt from 'bcryptjs';
 import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
 import { ChangePasswordDto } from "./dto/change-password.dto";
+import { Request } from "express";
 
 @Injectable()
 export class AuthService {
@@ -42,8 +43,19 @@ export class AuthService {
         };
     }
 
-    async verify(user: AuthUser) {
-        return await this.userService.findOne(user.id)
+    async verify(req: Request) {
+        const authorization = req.headers.authorization;
+        const [ bearer, token ] = authorization.split(' ');
+        if (bearer !== 'Bearer') {
+            throw new UnauthorizedException();
+        }
+        try {
+            const verified_user = await this.jwtService.verify(token);
+            const {password, ...response} = await this.userService.findOne(verified_user.id);
+            return {user: response};
+        } catch (e) {
+            throw new UnauthorizedException();
+        }
     }
 
     private async validateUser(signInDto: SignInDto) {

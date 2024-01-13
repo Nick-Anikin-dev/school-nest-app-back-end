@@ -26,19 +26,13 @@ export class Group extends BaseEntity implements IGroup {
     })
     school: School;
 
-    @OneToMany(()=> Lesson, (lesson)=> lesson.group)
+    @OneToMany(() => Lesson, (lesson)=> lesson.group)
     lessons: Lesson[];
 
-    @ManyToMany(()=> Student, (student)=> student.groups)
-    @JoinTable({
-        name: 'group-student'
-    })
+    @ManyToMany(() => Student, (student) => student.groups)
     students: Student[];
 
 
-    @ManyToMany(()=> Teacher, (teacher)=> teacher.groups)
-    @JoinTable({
-        name: 'group-teacher'
-    })
+    @ManyToMany(() => Teacher, (teacher)=> teacher.groups)
     teachers: Teacher[];
 }

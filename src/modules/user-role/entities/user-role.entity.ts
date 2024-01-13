@@ -1,11 +1,12 @@
 import { IUserRole } from "../../../core/user-role/user-role.interface";
 import { Role } from "../../../common/types/enums/role.enum";
-import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne } from "typeorm";
 import { User } from "../../user/entities/user.entity";
 import { Student } from "../../student/entities/student.entity";
 import { Teacher } from "../../teacher/entities/teacher.entity";
 import { Admin } from "../../admin/entities/admin.entity";
 import { BaseEntity } from "../../../common/types/base-entity";
+import { Event } from "../../event/entities/event.entity";
 
 @Entity('user-role')
 export class UserRole extends BaseEntity implements IUserRole {
@@ -47,4 +48,10 @@ export class UserRole extends BaseEntity implements IUserRole {
         cascade: true,
     })
     admin: Admin;
+
+    @ManyToMany(() => Event, (event) => event.guests)
+    @JoinTable({
+        name: 'user-role-event'
+    })
+    events: Event[];
 }

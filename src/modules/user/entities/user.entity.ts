@@ -31,6 +31,24 @@ export class User extends BaseEntity implements IUser {
     password: string;
 
     @Column({
+        type: 'varchar',
+        nullable: true,
+    })
+    self_presentation: string | null;
+
+    @Column({
+        type: 'jsonb',
+        nullable: true,
+    })
+    interests: string[] | null;
+
+    @Column({
+        type: 'varchar',
+        nullable: true,
+    })
+    avatar_url: string | null;
+
+    @Column({
         type: 'int',
         nullable: true,
     })

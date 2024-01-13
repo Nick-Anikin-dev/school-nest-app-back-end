@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { GroupService } from './group.service';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
@@ -8,9 +8,10 @@ import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
 import { Roles } from "../../common/decorators/role.decorator";
 import { Role } from "../../common/types/enums/role.enum";
 import { GroupParamsDto } from "./dto/group-params.dto";
+import { FindGroupQueryDto } from "./dto/find-group-query.dto";
 
 @Controller('group')
-@UseGuards(RolesGuard)
+//@UseGuards(RolesGuard)
 export class GroupController {
   constructor(private readonly groupService: GroupService) {}
 
@@ -22,25 +23,25 @@ export class GroupController {
 
   @Get('/school/:school_id')
   @Roles(Role.ADMIN, Role.TEACHER, Role.STUDENT)
-  async findAll(@Param('school_id') school_id: string) {
-    return await this.groupService.findAll(+school_id);
+  async find(@Param('school_id') school_id: string, @Query() query: FindGroupQueryDto) {
+    return await this.groupService.find(+school_id, query);
   }
 
-  @Get(':id/school/:school_id')
+  @Get(':id')
   @Roles(Role.ADMIN, Role.TEACHER, Role.STUDENT)
-  async findOne(@Param() params: GroupParamsDto) {
-    return await this.groupService.findOne(params.id, params.school_id);
+  async findOne(@Param('id') id: string) {
+    return await this.groupService.findOne(+id);
   }
 
-  @Patch(':id/school/:school_id')
+  @Patch(':id')
   @Roles(Role.ADMIN)
-  async update(@Param() params: GroupParamsDto, @Body() dto: UpdateGroupDto) {
-    return await this.groupService.update(+params.id, +params.school_id, dto);
+  async update(@Param('id') id: string, @Body() dto: UpdateGroupDto) {
+    return await this.groupService.update(+id, dto);
   }
 
-  @Delete(':id/school/:school_id')
+  @Delete(':id')
   @Roles(Role.ADMIN)
-  async remove(@Param() params: GroupParamsDto) {
-    return await this.groupService.remove(params.id, params.school_id);
+  async remove(@Param('id') id: string) {
+    return await this.groupService.remove(+id);
   }
 }

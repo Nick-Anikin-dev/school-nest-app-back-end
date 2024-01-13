@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignUpDto } from "./dto/sign-up.dto";
 import { SignInDto } from "./dto/sign-in.dto";
@@ -6,6 +6,7 @@ import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
 import { User } from "../../common/decorators/user.decorator";
 import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
 import { ChangePasswordDto } from "./dto/change-password.dto";
+import { Request } from "express";
 
 @Controller('auth')
 export class AuthController {
@@ -14,8 +15,8 @@ export class AuthController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  async verify(@User() user: AuthUser){
-    return await this.authService.verify(user);
+  async verify(@Req() req: Request){
+    return await this.authService.verify(req);
   }
 
   @Post('/sign-in')

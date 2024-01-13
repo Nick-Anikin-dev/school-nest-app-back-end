@@ -1,5 +1,3 @@
-import { Role } from "../../common/types/enums/role.enum";
-
 export interface IUser {
     id: number;
     role_id: number;

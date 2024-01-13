@@ -5,11 +5,16 @@ import { User } from "./entities/user.entity";
 import { Repository } from "typeorm";
 import { UserRoleService } from "../user-role/user-role.service";
 import { FindOptionsWhere } from "typeorm/find-options/FindOptionsWhere";
+import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
+import { UpdateProfileDto } from "./dto/update-profile.dto";
+import { ConfigService } from "@nestjs/config";
+
 
 @Injectable()
 export class UserService {
   constructor(
       private readonly userRoleService: UserRoleService,
+      private readonly configService: ConfigService,
       @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {
   }
@@ -49,5 +54,30 @@ export class UserService {
 
   async updatePassword(user_id, password) {
     return await this.userRepository.update({id: user_id}, {password})
+  }
+
+  async find() {
+    return await this.userRepository.find({
+      relations: [ 'role' ],
+    })
+  }
+
+  async updateProfile(user: AuthUser, dto: UpdateProfileDto, avatar: Express.Multer.File) {
+    let payload = dto;
+    if (avatar) {
+      const avatar_url = `${this.configService.get('SERVER_URL')}:${this.configService.get('PORT')}/${avatar.filename}`;
+      payload = {...payload, avatar_url}
+    }
+    return await this.userRepository.update({id: user.id}, payload);
+  }
+
+  async getProfileData(user: AuthUser) {
+    return await this.userRepository.findOne({
+      select: ['id'],
+      where: {
+        id: user.id,
+      },
+      relations: [ 'user_role.student.school', 'user_role.teacher.school', 'user_role.admin.school' ]
+    })
   }
 }

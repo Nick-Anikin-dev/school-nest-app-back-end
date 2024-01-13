@@ -40,8 +40,5 @@ export class Student extends RoleTemplate implements IStudent {
     lessons: Lesson[];
 
     @ManyToMany(() => Teacher, (teacher) => teacher.students)
-    @JoinTable({
-        name: 'teacher-student'
-    })
     teachers: Teacher[];
 }

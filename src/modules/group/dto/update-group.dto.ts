@@ -2,8 +2,8 @@ import { IsArray, IsInt, IsNotEmpty, IsOptional, IsString } from "class-validato
 
 export class UpdateGroupDto {
     @IsString()
-    @IsNotEmpty()
-    name: string;
+    @IsOptional()
+    name?: string;
 
     @IsOptional()
     @IsArray()
