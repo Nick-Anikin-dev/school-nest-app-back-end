@@ -4,9 +4,9 @@ import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
 import { join } from "path";
 import { NestExpressApplication } from "@nestjs/platform-express";
+import { ConfigService } from "@nestjs/config";
 
 async function bootstrap() {
-  const PORT = process.env.PORT || 5000;
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   const config = new DocumentBuilder()
@@ -28,10 +28,14 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      "http://localhost:3000"
+      "http://localhost:3000",
+      "https://online-school-85bedab87b9c.herokuapp.com"
     ]
   });
+  const configService: ConfigService = app.get(ConfigService);
+  const port = +configService.get<number>('PORT') || 3000;
+  await app.listen(port);
 
-  await app.listen(PORT, () => console.log(`Server started on port = ${PORT}`));
+  await app.listen(port, () => console.log(`Server started on port = ${port}`));
 }
 bootstrap();
