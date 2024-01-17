@@ -37,7 +37,10 @@ function getDatabaseConfig(
                 database: configService.get("DB_DATABASE"),
                 entities,
                 migrations: [ __dirname + "/migrations/*.ts" ],
-                migrationsTableName: "migrations"
+                migrationsTableName: "migrations",
+                ssl: {
+                    rejectUnauthorized: false,
+                },
             };
         default:
             return {
