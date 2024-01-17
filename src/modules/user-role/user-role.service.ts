@@ -7,6 +7,8 @@ import { Student } from "../student/entities/student.entity";
 import { Teacher } from "../teacher/entities/teacher.entity";
 import { Admin } from "../admin/entities/admin.entity";
 import { Role } from "../../common/types/enums/role.enum";
+import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
+import { School } from "../school/entities/school.entity";
 
 @Injectable()
 export class UserRoleService {
@@ -48,11 +50,26 @@ export class UserRoleService {
     return await repository.save(new_user_role);
   }
 
+  async joinSchool(user: AuthUser, school: School) {
+    const user_role = await this.userRoleRepository.findOne({
+      where: {
+        user_id: user.id
+      }
+    })
+    return await this.userRoleRepository.save({
+      ...user_role,
+        [user_role.type]: {
+          ...user_role[user_role.type],
+          school,
+        }
+    });
+  }
+
   async findOne(id: number) {
     return await this.userRoleRepository.findOne({where: {id}});
   }
 
-  async del(id: number){
+  async del(id: number) {
     const user_r = await this.userRoleRepository.findOne({where: {id}});
     return await this.userRoleRepository.remove(user_r)
   }

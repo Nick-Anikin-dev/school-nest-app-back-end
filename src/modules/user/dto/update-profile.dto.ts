@@ -1,4 +1,5 @@
 import { IsArray, IsOptional, IsString, MaxLength } from "class-validator";
+import { Transform } from "class-transformer";
 
 export class UpdateProfileDto {
     @IsOptional()
@@ -11,6 +12,7 @@ export class UpdateProfileDto {
     @IsString({
         each: true
     })
+    @Transform(({value}) => JSON.parse(value))
     interests: string[];
 
     @IsOptional()

@@ -21,8 +21,8 @@ export class EventController {
 
   @Get('school/:id')
   @Roles(Role.ADMIN)
-  async findAll(@User() user: AuthUser) {
-    return await this.eventService.findAll(user);
+  async findAll(@Param('id') school_id: string, @User() user: AuthUser) {
+    return await this.eventService.findAll(user, +school_id);
   }
 
   @Get(':id')
@@ -39,7 +39,7 @@ export class EventController {
 
   @Delete(':id')
   @Roles(Role.ADMIN)
-  async remove(@Param('id') id: string, @User() user: AuthUser) {
-    return await this.eventService.remove(+id, user);
+  async remove(@Param('id') id: string) {
+    return await this.eventService.remove(+id);
   }
 }

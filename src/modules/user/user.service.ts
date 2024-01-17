@@ -8,6 +8,7 @@ import { FindOptionsWhere } from "typeorm/find-options/FindOptionsWhere";
 import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
 import { UpdateProfileDto } from "./dto/update-profile.dto";
 import { ConfigService } from "@nestjs/config";
+import { FindUsersForCooperationQuery } from "./dto/find-users-for-cooperation.query";
 
 
 @Injectable()
@@ -73,11 +74,20 @@ export class UserService {
 
   async getProfileData(user: AuthUser) {
     return await this.userRepository.findOne({
-      select: ['id'],
+      select: [ 'id', 'first_name', 'last_name', 'email', 'interests', 'created_at', 'self_presentation', 'avatar_url' ],
       where: {
         id: user.id,
       },
-      relations: [ 'user_role.student.school', 'user_role.teacher.school', 'user_role.admin.school' ]
+      relations: [ 'role.student.school', 'role.teacher.school', 'role.admin.school' ]
     })
   }
+
+    async findUsersForCooperation(query: FindUsersForCooperationQuery) {
+        const {search, role} = query;
+        return await this.userRepository.createQueryBuilder('user')
+            .leftJoin('user.role', 'role')
+            .leftJoin('user.role', 'role')
+            .where('')
+            .getMany()
+    }
 }

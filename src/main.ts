@@ -20,11 +20,11 @@ async function bootstrap() {
 
   app.useGlobalPipes(
       new ValidationPipe({
-        whitelist: true
+        whitelist: true,
+        transform: true,
       })
   );
-
-  app.useStaticAssets(join(__dirname, '..', 'files'));
+  app.useStaticAssets(join(__dirname, '..', 'public'));
 
   app.enableCors({
     origin: [

@@ -1,10 +1,10 @@
 {
-  "name": "school-back-end",
+  "name": "online-school-back-end",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Nikolay Anikin",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "IBM",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -21,7 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs/common": "^10.0.2",
+    "@nestjs/common": "9.0.0",
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^8.0.0",
     "@nestjs/jwt": "^10.1.1",

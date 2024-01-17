@@ -8,9 +8,10 @@ import { Role } from "../../common/types/enums/role.enum";
 import { User } from "../../common/decorators/user.decorator";
 import { AuthUser } from "../../common/types/interfaces/auth-user.interface";
 import { IUser } from "../../core/user/user.interface";
+import { JoinSchoolDto } from "./dto/join-school.dto";
 
 @Controller('school')
-@UseGuards(RolesGuard)
+    //@UseGuards(RolesGuard)
 export class SchoolController {
   constructor(private readonly schoolService: SchoolService) {}
 
@@ -36,5 +37,10 @@ export class SchoolController {
   @Roles(Role.ADMIN)
   async remove(@Param('id') id: string, @User() user: AuthUser) {
     return await this.schoolService.remove(+id, user);
+  }
+
+  @Post('/invitation/join')
+  async joinSchool(@User() user: AuthUser, @Body() dto: JoinSchoolDto){
+    return await this.schoolService.joinSchool(user, dto);
   }
 }
