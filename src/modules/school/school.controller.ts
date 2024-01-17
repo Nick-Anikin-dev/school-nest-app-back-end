@@ -11,7 +11,7 @@ import { IUser } from "../../core/user/user.interface";
 import { JoinSchoolDto } from "./dto/join-school.dto";
 
 @Controller('school')
-    //@UseGuards(RolesGuard)
+    @UseGuards(RolesGuard)
 export class SchoolController {
   constructor(private readonly schoolService: SchoolService) {}
 
